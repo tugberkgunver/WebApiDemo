@@ -26,6 +26,8 @@ namespace Heysem.WebApiDemo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<ICountryDal, EfCoutryDal>();
+            services.AddScoped<IDestinationDal, EfDestinationDal>();
+            services.AddScoped<ICountryDestinationsDal, EfCountryDestinationsDal>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 

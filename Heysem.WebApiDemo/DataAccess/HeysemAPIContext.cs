@@ -11,9 +11,11 @@ namespace Heysem.WebApiDemo.DataAccess
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=DESKTOP-2LS3T2B\SQLEXPRESS;Database=HeysemWebApi;Trusted_Connection=true");
+            optionsBuilder.UseSqlServer(@"Server=DESKTOP-G0UC2RP\SQLEXPRESS;Database=HeysemWebApi;Trusted_Connection=true");
         }
 
-        DbSet<Country> Countries { get; set; }
+      public  DbSet<Country> Countries { get; set; }
+        public DbSet<CountryDestinations> CountryDestinations { get; set; }
+        public DbSet<Destinations> Destinations { get; set; }
     }
 }

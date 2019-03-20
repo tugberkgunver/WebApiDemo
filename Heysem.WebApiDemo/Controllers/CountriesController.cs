@@ -11,7 +11,7 @@ using Rest;
 
 namespace Heysem.WebApiDemo.Controllers
 {
-     
+
     [Route("api/[controller]")]
     [ApiController]
     public class CountriesController : Controller
@@ -19,10 +19,13 @@ namespace Heysem.WebApiDemo.Controllers
         Class1 a = new Class1();
 
         ICountryDal _countryDal;
+        IDestinationDal _destinationDal;
+        ICountryDestinationsDal _countryDestinationsDal;
 
-        public CountriesController(ICountryDal countryDal)
+        public CountriesController(ICountryDal countryDal , ICountryDestinationsDal countryDestinationsDal)
         {
             _countryDal = countryDal;
+            _countryDestinationsDal = countryDestinationsDal;
         }
 
         [HttpGet("")]
@@ -49,7 +52,7 @@ namespace Heysem.WebApiDemo.Controllers
 
                 throw;
             }
-          
+
         }
 
         [HttpPost]
@@ -58,7 +61,7 @@ namespace Heysem.WebApiDemo.Controllers
             try
             {
                 _countryDal.Add(country);
-                
+
                 return new StatusCodeResult(201);
             }
             catch (Exception)
@@ -90,7 +93,7 @@ namespace Heysem.WebApiDemo.Controllers
         {
             try
             {
-                _countryDal.Delete(new Country  {CountryId = countryId });
+                _countryDal.Delete(new Country { CountryId = countryId });
 
                 return Ok();
             }
@@ -99,6 +102,15 @@ namespace Heysem.WebApiDemo.Controllers
 
                 throw;
             }
+        }
+
+        [HttpGet("GetDestinations/{countryId}")]
+        public IActionResult GetDestinations(int countryId)
+        {
+
+            var destinations = _countryDestinationsDal.GetCountryDestinations(countryId);
+                return Ok(destinations);
+          
         }
 
 
